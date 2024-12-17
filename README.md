@@ -1,6 +1,11 @@
-# HDL examples
-===========
+HDL Examples (VHDL & Verilog)
+=============================
 
-This is a collection of HDL examples that I have created, as I was practicing VHDL and Verilog.
+This repository contains a collection of HDL examples I created while practicing VHDL and Verilog. The examples are organized by language (VHDL and Verilog) and by different practice sections. Each section includes a `setup.tcl` file to easily create and configure the project in Vivado.
 
-The examples are organized by language, and then by the type of project. Inside each folder, there is setup.tcl file that will setup the project in Vivado.
+## Getting Started
+
+Clone this repository to your local machine:
+```bash
+   git clone https://github.com/vgalovic/HDL_examples.git
+```
