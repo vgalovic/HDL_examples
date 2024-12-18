@@ -9,12 +9,13 @@ The repository is organized into language-specific folders (`VHDL/` and `Verilog
 
 <pre>
     HDL_examples/
-    ├── &lt;language&gt;/                   - Directory for VHDL/ and Verilog/ examples
-    │   └── &lt;practice-section&gt;/       - Directory for a specific practice section
-    │      ├── sim/                 - Contains simulation files for the practice section
-    │      ├── src/                 - Contains source files for the practice section
-    │      └── setup.tcl            - TCL script for seting up the Vivado project for the practice section
+    ├── &lt;language&gt;/                  - Directory for VHDL/ and Verilog/ examples
+    │   └── &lt;practice-section&gt;/      - Directory for a specific practice section
+    │      ├── sim/                  - Contains simulation files for the practice section
+    │      ├── src/                  - Contains source files for the practice section
+    │      └── setup.tcl             - TCL script for seting up the Vivado project for the practice section
     └── create_project.tcl           - TCL script for creating a new Vivado project
+    
 </pre>
 
 ## Getting Started
@@ -25,12 +26,12 @@ To get started with the examples, clone this repository to your local machine:
 git clone https://github.com/vgalovic/HDL_examples.git
 ```
 
-## Setting Up the *Vivado* Project
+## Setting Up the Vivado Project
 
 To set up a specific practice section in *Vivado*, use the following command in the TCL console:
 
 ```tcl
-source <path_to_your_directory>/HDL_examples/<language>/<practice-section>/setup.tcl
+source <base_directory>/HDL_examples/<language>/<practice-section>/setup.tcl
 ```
 
 This will:
@@ -38,4 +39,4 @@ This will:
 - Create a new *Vivado* project in `$HOME/Documents/Vivado`.
 - Add all relevant source files and simulation files to the project.
 
-> 📝 **Note:** Make sure to replace `<path_to_your_directory>`, `<language>`, and `<practice-section>` with the correct paths based on repository structure.
+> 📝 **Note:** Make sure to replace `<base_directory>`, `<language>`, and `<practice-section>` with the correct paths based on repository structure.
