@@ -49,6 +49,8 @@ architecture Behavioral of d_flip_flop_with_delays_plus_assert is
     signal D_last_event : time := 0 ns;
 begin
     process(clk, D, last_D, D_last_event, Q_internal)
+        variable setup_violation : boolean := false;
+        variable hold_violation  : boolean := false;
     begin
         if D /= last_D then
             last_D <= D;
@@ -58,7 +60,7 @@ begin
         if rising_edge(clk) then
             -- Check setup time violation
             if now - D_last_event < tsu then
-                report "Setup time violation detected" severity warning;
+                setup_violation := true;
                 Q_internal <= 'X';
             else
                 -- Propagate input to output after tcq delay
@@ -68,12 +70,23 @@ begin
 
         if D /= last_D and not rising_edge(clk) then
             if now - D_last_event > th then
-                report "Hold time violation detected" severity warning;
+                hold_violation := true;
                 Q_internal <= 'X';
             end if;
         end if;
 
-    Q <= Q_internal;
+        assert not setup_violation
+             report "Setup violation detected at time " & time'image(now)
+             severity error;
+
+        assert not hold_violation
+            report "Hold violation detected at time " & time'image(now)
+            severity error;
+
+        setup_violation := false;
+        hold_violation := false;
+
+        Q <= Q_internal;
     end process;
 
 end Behavioral;

@@ -49,7 +49,6 @@ architecture Behavioral of d_flip_flop_with_delays_plus_assert_tb is
     signal Q_s : STD_LOGIC;
 
     constant clk_period : time := 10 ns; -- Clock period
-    constant half_clk_period : time := clk_period / 2;
 begin
     duv: d_flip_flop_with_delays_plus_assert
         port map (
@@ -63,9 +62,9 @@ begin
     begin
         while now < 200 ns loop
             clk_s <= '0';
-            wait for half_clk_period;
+            wait for clk_period/2;
             clk_s<= '1';
-            wait for half_clk_period;
+            wait for clk_period/2;
         end loop;
         wait;
     end process;
@@ -83,14 +82,14 @@ begin
         -- Setup time violation: Change D just before rising edge of clk
         wait for clk_period - 1 ns;
         D_s <= '0';
-        wait for clk_period + 5 ns;
+        wait for clk_period;
         assert Q_s = 'X' report "Setup time violation not detected properly" severity error;
 
         -- Hold time violation: Change D just after rising edge of clk
         D_s <= '1';
         wait for 1 ns;
         D_s <= '0';
-        wait for clk_period + 5 ns;
+        wait for clk_period;
         assert Q_s = 'X' report "Hold time violation not detected properly" severity error;
 
         -- Normal operation again
