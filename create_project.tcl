@@ -10,7 +10,7 @@ set device_part "xc7z020clg484-1"  ;# Zedboard and ZedBoard Zynq Evaluation Kit
 # Normalize the path to make sure it is correct
 set sources_dir [file normalize [file join $create_project_dir  $target_hdl $project_name "src"]]
 set sim_dir [file normalize [file join $create_project_dir  $target_hdl $project_name "sim"]]
-# set constraints_dir [file normalize [file join $create_project_dir  $target_hdl $project_name "constraints"]]
+set constrs_dir [file normalize [file join $create_project_dir  $target_hdl $project_name "constrs"]]
 
 ################################################################################
 
@@ -28,10 +28,16 @@ set_property target_language $target_hdl [current_project]
 ################################################################################
 
 # Add design sources
-add_files -scan_for_includes $sources_dir
+if {[file exists $sources_dir]} {
+    add_files -scan_for_includes $sources_dir
+}
 
 # Add simulation sources
-add_files -scan_for_includes -fileset sim_1 $sim_dir
+if {[file exists $sim_dir]} {
+    add_files -scan_for_includes -fileset sim_1 $sim_dir
+}
 
 # Add constraints
-# add_files -scan_for_includes -fileset constrs_1 $constraints_dir
+if {[file exists $constrs_dir]} {
+    add_files -scan_for_includes -fileset constrs_1 $contrs_dir
+}
