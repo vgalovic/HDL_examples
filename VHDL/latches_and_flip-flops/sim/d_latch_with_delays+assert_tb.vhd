@@ -73,7 +73,7 @@ begin
         load_s <= '0';  -- Set load_s to '0' initially (load disabled)
         wait for 20 ns;  -- Wait for 20 ns to ensure stability of initial signals
 
-        -- Test when load is disabled
+        -- TEST: when load is disabled
         report "Test load disabled" severity note;
         D_s <= '1';  -- Set D_s to '1'
         wait for 6 ns;  -- Wait for 6 ns for signal propagation
@@ -81,7 +81,7 @@ begin
             report "Q should not change when load is '0'" severity error;
         wait for 14 ns;  -- Wait for 14 ns before the next test
 
-        -- Test when load is enabled
+        -- TEST: when load is enabled
         report "Test load enabled" severity note;
         load_s <= '1';  -- Set load_s to '1' (load enabled)
         wait for 6 ns;  -- Wait for 6 ns for signal propagation
@@ -89,7 +89,7 @@ begin
             report "Q should follow D when load is '1'" severity error;
         wait for 14 ns;  -- Wait for 14 ns before the next test
 
-        -- Test setup time violation
+        -- TEST: setup time violation
         report "Test setup time violation" severity note;
         load_s <= '1';  -- Ensure load is enabled
         wait for 1 ns;  -- Wait for 1 ns to ensure load_s is stable
@@ -106,7 +106,7 @@ begin
             report "Setup violation expected 'X'" severity error;
         wait for 19 ns;  -- Wait for 19 ns before the next test
 
-        -- Test hold time violation
+        -- TEST: hold time violation
         report "Test hold time violation" severity note;
         D_s <= '1';  -- Set D_s to '1'
         wait for 1 fs;  -- Wait for a very short time to simulate a change
@@ -116,7 +116,7 @@ begin
             report "Hold violation expected 'X'" severity error;
         wait for 19 ns;  -- Wait for 19 ns before the next test
 
-        -- Test normal operation
+        -- TEST: normal operation
         report "Test normal operation" severity note;
         load_s <= '1';  -- Set load_s to '1' (enable load)
         wait for 2 ns;  -- Wait for 2 ns for signal propagation
