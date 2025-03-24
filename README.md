@@ -26,15 +26,29 @@ git clone https://github.com/vgalovic/HDL_examples.git
 
 ## Setting Up the Vivado Project
 
-To set up a specific practice section in _Vivado_, use the following command in the TCL console:
+To set up a specific practice section in _Vivado_, follow these steps:
+
+### 1. Fetch Latest Available Boards (if needed)
+
+If you have just installed _Vivado_, you will need to fetch the latest available boards from the git repository. Run the following command in the TCL console:
+
+```tcl
+xhub::refresh_catalog [xhub::get_xstores xilinx_board_store]
+```
+
+This will refresh the catalog and ensure you have access to the latest board configurations.
+
+### 2. Source the Setup Script
+
+Once the boards are fetched, open the TCL console in Vivado and run the following command to set up the project:
 
 ```tcl
 source <base_directory>/HDL_examples/<language>/<practice-section>/setup.tcl
 ```
 
+> 📝 **Note**: Make sure to replace `<base_directory>`, `<language>`, and `<practice-section>` with the correct paths based on your repository structure.
+
 This will:
 
-- Create a new _Vivado_ project in `$HOME/Documents/Vivado`.
-- Add all relevant source files and simulation files to the project.
-
-> 📝 **Note:** Make sure to replace `<base_directory>`, `<language>`, and `<practice-section>` with the correct paths based on repository structure.
+- Create a new Vivado project in `$HOME/Documents/Vivado`.
+- Add all relevant source files and simulation files for the specified practice section.
