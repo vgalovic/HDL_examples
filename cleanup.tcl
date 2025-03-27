@@ -7,7 +7,7 @@ set vars_to_cleanup {
     create_project_dir
     device_part
     project_dir
-    project_directory_base
+    project_dir_base
     project_name
     sim_dir
     sources_dir

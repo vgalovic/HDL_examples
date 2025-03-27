@@ -1,6 +1,22 @@
 # Set Vivado's default project directory
-set project_directory_base [file normalize [file join $env(HOME) "Documents" "Vivado"]]
-set project_dir [file normalize [file join $project_directory_base "HDL_examples" $target_hdl $project_name ]]
+#
+# Check if running on Windows or Linux and set the project directory base accordingly
+if {[string match "Windows" $tcl_platform(platform)]} {
+    # For Windows
+    set project_dir_base [file normalize [file join $env(USERPROFILE) "Documents" "Vivado" "HDL_examples"]]
+} else {
+    # For Linux
+    set project_dir_base [file normalize [file join $env(HOME) "Documents" "Vivado" "HDL_examples"]]
+}
+
+# Print the project directory base to verify
+puts "Project directory base: $project_dir_base"
+
+# Expand the project directory base to get the full path
+set project_dir [file normalize [file join $project_dir_base $target_hdl $project_name ]]
+
+# Print the project directory to verify
+puts "Project directory: $project_dir"
 
 # Set the target device for your project
 set device_part "xc7z020clg484-1"  ;# Zedboard and ZedBoard Zynq Evaluation Kit
@@ -13,8 +29,6 @@ set sim_dir [file normalize [file join $create_project_dir  $target_hdl $project
 set constrs_dir [file normalize [file join $create_project_dir  $target_hdl $project_name "constrs"]]
 
 ################################################################################
-
-exec mkdir -p $project_directory_base
 
 # if $sub_project_name is not defined, create a top-level project
 if { [info exists sub_project_name] } {
@@ -43,5 +57,5 @@ if {[file exists $sim_dir]} {
 
 # Add constraints
 if {[file exists $constrs_dir]} {
-    add_files -scan_for_includes -fileset constrs_1 $contrs_dir
+    add_files -scan_for_includes -fileset constrs_1 $constrs_dir
 }
