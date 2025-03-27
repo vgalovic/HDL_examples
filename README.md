@@ -16,6 +16,9 @@ The repository is organized into language-specific folders (`VHDL/` and `Verilog
 └── create_project.tcl       - TCL script for creating a new Vivado project
 ```
 
+> 📝 **Note**: For the `<practice-section>` _hierarchical_design_, there are subprojects, as they show how the hierarchy works in `VHDL/` and `Verilog/`.
+> You'll need to run the `setup.tcl` script for each subproject inside the _hierarchical_design_ directory.
+
 ## Getting Started
 
 To get started with the examples, clone this repository to your local machine:
