@@ -16,8 +16,12 @@ set constrs_dir [file normalize [file join $create_project_dir  $target_hdl $pro
 
 exec mkdir -p $project_directory_base
 
-# Create the project in the default directory
-create_project $project_name $project_dir -part $device_part
+# if $sub_project_name is not defined, create a top-level project
+if { [info exists sub_project_name] } {
+    create_project $sub_project_name $project_dir -part $device_part
+} else {
+    create_project $project_name $project_dir -part $device_part
+}
 
 set_property board_part avnet.com:zedboard:part0:1.4 [current_project] ;# ZedBoard Zynq Evaluation Kit
 #set_property board_part digilentinc.com:zybo-z7-20:part0:1.2 [current_project] ;# Zybo Z7-20
