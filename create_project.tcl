@@ -1,6 +1,6 @@
 # Set Vivado's default project directory
 set project_directory_base [file normalize [file join $env(HOME) "Documents" "Vivado"]]
-set project_dir [file normalize [file join $project_directory_base $project_name]]
+set project_dir [file normalize [file join $project_directory_base "HDL_examples" $target_hdl $project_name ]]
 
 # Set the target device for your project
 set device_part "xc7z020clg484-1"  ;# Zedboard and ZedBoard Zynq Evaluation Kit
