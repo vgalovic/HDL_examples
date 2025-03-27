@@ -16,9 +16,6 @@ The repository is organized into language-specific folders (`VHDL/` and `Verilog
 └── create_project.tcl       - TCL script for creating a new Vivado project
 ```
 
-> 📝 **Note**: For the `<practice-section>` _hierarchical_design_, there are subprojects, as they show how the hierarchy works in `VHDL/` and `Verilog/`.
-> You'll need to run the `setup.tcl` script for each subproject inside the _hierarchical_design_ directory.
-
 ## Getting Started
 
 To get started with the examples, clone this repository to your local machine:
@@ -33,7 +30,7 @@ To set up a specific practice section in _Vivado_, follow these steps:
 
 ### 1. Fetch Latest Available Boards (if needed)
 
-If you have just installed _Vivado_, you will need to fetch the latest available boards from the git repository. Run the following command in the TCL console:
+If you have just installed _Vivado_, you will need to fetch the latest available boards from the git repository. Run the following command in the **TCL console**:
 
 ```tcl
 xhub::refresh_catalog [xhub::get_xstores xilinx_board_store]
@@ -43,15 +40,21 @@ This will refresh the catalog and ensure you have access to the latest board con
 
 ### 2. Source the Setup Script
 
-Once the boards are fetched, open the TCL console in Vivado and run the following command to set up the project:
+Once the boards are fetched, open the **TCL console** in Vivado and run the following command to set up the project:
 
 ```tcl
 source <base_directory>/HDL_examples/<language>/<practice-section>/setup.tcl
 ```
 
-> 📝 **Note**: Make sure to replace `<base_directory>`, `<language>`, and `<practice-section>` with the correct paths based on your repository structure.
-
 This will:
 
-- Create a new Vivado project in `$HOME/Documents/Vivado`.
-- Add all relevant source files and simulation files for the specified practice section.
+- Create a new Vivado project in:
+  - `$HOME/Documents/Vivado/HDL_examples/<language>/` (Linux)
+  - `%USERPROFILE%\Documents\Vivado\HDL_examples\<language>\` (Windows)
+- Add all relevant source files and simulation files for the specified **practice section**.
+
+#### 📝 Note:
+
+- Replace `<base_directory>`, `<language>`, and `<practice-section>` with the correct paths based on your repository structure.
+- In the `<practice-section>` _hierarchical_design_, there are subprojects that demonstrate hierarchy in both `VHDL/` and `Verilog/`.
+  You must run the `setup.tcl` script for each subproject within the _hierarchical_design_ directory.
