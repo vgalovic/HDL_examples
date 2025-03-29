@@ -1,101 +1,71 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: Vladimir Galović
--- 
--- Create Date: 03/27/2025 12:35:55 PM
--- Design Name: 
--- Module Name: top - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
-
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
+  use IEEE.STD_LOGIC_1164.ALL;
 
 entity top is
   generic (
     WIDTH : integer := 8
   );
   port (
-    a_in : in std_logic_vector(WIDTH-1 downto 0);
-    b_in : in std_logic_vector(WIDTH-1 downto 0);
+    a_in : in STD_LOGIC_VECTOR(WIDTH-1 downto 0);
+    b_in : in STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 
-    clk : in std_logic;
-    rst : in std_logic;
+    clk : in STD_LOGIC;
+    rst : in STD_LOGIC;
 
-    start : in std_logic;
+    start : in STD_LOGIC;
 
-    quotient : out std_logic_vector(WIDTH-1 downto 0);
-    remainder : out std_logic_vector(WIDTH-1 downto 0);
+    quotient : out STD_LOGIC_VECTOR(WIDTH-1 downto 0);
+    remainder : out STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 
-    last : out std_logic;
-    ready : out std_logic
+    last : out STD_LOGIC;
+    ready : out STD_LOGIC
   );
-end top;
+end entity top;
 
 architecture Behavioral of top is
 
-  component control_path
+  component control_path is
     generic (
       WIDTH : integer := WIDTH
     );
     port (
-      clk : in std_logic;
-      rst : in std_logic;
+      clk : in STD_LOGIC;
+      rst : in STD_LOGIC;
 
-      start : in std_logic;
+      start : in STD_LOGIC;
 
-      n_n : in std_logic_vector(WIDTH-1 downto 0);
+      n_n : in STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 
-      last : out std_logic;
-      ready : out std_logic;
+      last  : out STD_LOGIC;
+      ready : out STD_LOGIC;
 
-      sel : out std_logic_vector(1 downto 0)
+      sel : out STD_LOGIC_VECTOR(1 downto 0)
     );
   end component control_path;
 
-  component data_path
+  component data_path is
     generic (
       WIDTH : integer := WIDTH
     );
     port (
-      clk : in std_logic;
-      rst : in std_logic;
+      clk : in STD_LOGIC;
+      rst : in STD_LOGIC;
 
-      a_in : in std_logic_vector(WIDTH-1 downto 0);
-      b_in : in std_logic_vector(WIDTH-1 downto 0);
+      a_in : in STD_LOGIC_VECTOR(WIDTH-1 downto 0);
+      b_in : in STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 
-      sel : in std_logic_vector(1 downto 0);
+      sel : in STD_LOGIC_VECTOR(1 downto 0);
 
-      n_n : out std_logic_vector(WIDTH-1 downto 0);
+      n_n : out STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 
-      quotient : out std_logic_vector(WIDTH-1 downto 0);
-      remainder : out std_logic_vector(WIDTH-1 downto 0)
+      quotient  : out STD_LOGIC_VECTOR(WIDTH-1 downto 0);
+      remainder : out STD_LOGIC_VECTOR(WIDTH-1 downto 0)
     );
   end component data_path;
 
-  signal n_n : std_logic_vector(WIDTH-1 downto 0);
+  signal n_n : STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 
-  signal sel : std_logic_vector(1 downto 0);
+  signal sel : STD_LOGIC_VECTOR(1 downto 0);
 
 begin
 
@@ -132,7 +102,7 @@ begin
 
       n_n => n_n,
 
-      quotient => quotient,
+      quotient  => quotient,
       remainder => remainder
     );
 

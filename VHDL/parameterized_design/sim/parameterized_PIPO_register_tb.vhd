@@ -1,39 +1,11 @@
-----------------------------------------------------------------------------------
--- Company:
--- Engineer: Vladimir Galović
---
--- Create Date: 03/23/2025 12:39:05 PM
--- Design Name:
--- Module Name: parameterized_PIPO_register_tb - Behavioral
--- Project Name:
--- Target Devices:
--- Tool Versions:
--- Description:
---
--- Dependencies:
---
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
---
-----------------------------------------------------------------------------------
-
-library ieee;
-  use ieee.std_logic_1164.all;
-
-  -- Uncomment the following library declaration if using
-  -- arithmetic functions with Signed or Unsigned values
-  use ieee.numeric_std.all;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
--- library UNISIM;
--- use UNISIM.VComponents.all;
+library IEEE;
+  use IEEE.STD_LOGIC_1164.ALL;
+  use IEEE.NUMERIC_STD.ALL;
 
 entity parameterized_pipo_register_tb is
   generic (
-    width_beh : integer := 16;
-    width_str : integer := 32;
+    WIDTH_BEH : integer := 16;
+    WIDTH_STR : integer := 32;
     period    : time    := 100 ns
   );
 --  Port ( );
@@ -43,34 +15,34 @@ architecture behavioral of parameterized_pipo_register_tb is
 
   component parameterized_pipo_register is
     generic (
-      width_beh : integer := width_beh;
-      width_str : integer := width_str
+      WIDTH_BEH : integer := WIDTH_BEH;
+      WIDTH_STR : integer := WIDTH_STR
     );
     port (
-      clk   : in    std_logic;
-      rst   : in    std_logic;
-      d_beh : in    std_logic_vector(width_beh - 1 downto 0);
-      y_beh : out   std_logic_vector(width_beh - 1 downto 0);
-      d_str : in    std_logic_vector(width_str - 1 downto 0);
-      y_str : out   std_logic_vector(width_str - 1 downto 0)
+      clk   : in    STD_LOGIC;
+      rst   : in    STD_LOGIC;
+      d_beh : in    STD_LOGIC_VECTOR(WIDTH_BEH - 1 downto 0);
+      y_beh : out   STD_LOGIC_VECTOR(WIDTH_BEH - 1 downto 0);
+      d_str : in    STD_LOGIC_VECTOR(WIDTH_STR - 1 downto 0);
+      y_str : out   STD_LOGIC_VECTOR(WIDTH_STR - 1 downto 0)
     );
   end component parameterized_pipo_register;
 
-  signal clk_s : std_logic;
-  signal rst_s : std_logic;
+  signal clk_s : STD_LOGIC;
+  signal rst_s : STD_LOGIC;
 
-  signal d_beh_s : std_logic_vector(width_beh - 1 downto 0);
-  signal y_beh_s : std_logic_vector(width_beh - 1 downto 0);
+  signal d_beh_s : STD_LOGIC_VECTOR(WIDTH_BEH - 1 downto 0);
+  signal y_beh_s : STD_LOGIC_VECTOR(WIDTH_BEH - 1 downto 0);
 
-  signal d_str_s : std_logic_vector(width_str - 1 downto 0);
-  signal y_str_s : std_logic_vector(width_str - 1 downto 0);
+  signal d_str_s : STD_LOGIC_VECTOR(WIDTH_STR - 1 downto 0);
+  signal y_str_s : STD_LOGIC_VECTOR(WIDTH_STR - 1 downto 0);
 
 begin
 
   dut : component parameterized_pipo_register
     generic map (
-      width_beh => width_beh,
-      width_str => width_str
+      WIDTH_BEH => WIDTH_BEH,
+      WIDTH_STR => WIDTH_STR
     )
     port map (
       clk   => clk_s,
@@ -113,9 +85,9 @@ begin
   data_beh_gen : process is
   begin
 
-    for i in 0 to 15 loop
+    for i in 0 to WIDTH_BEH - 1 loop
 
-      d_beh_s <= std_logic_vector(to_unsigned(i, width_beh));
+      d_beh_s <= STD_LOGIC_VECTOR(TO_UNSIGNED(i, WIDTH_BEH));
       wait for period;
 
     end loop;
@@ -128,9 +100,9 @@ begin
   data_str_gen : process is
   begin
 
-    for i in 0 to 31 loop
+    for i in 0 to WIDTH_STR - 1 loop
 
-      d_str_s <= std_logic_vector(to_unsigned(i, width_str));
+      d_str_s <= STD_LOGIC_VECTOR(TO_UNSIGNED(i, WIDTH_STR));
       wait for period / 2;
 
     end loop;

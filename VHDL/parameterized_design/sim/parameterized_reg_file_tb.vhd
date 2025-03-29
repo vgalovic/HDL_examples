@@ -1,46 +1,18 @@
-----------------------------------------------------------------------------------
--- Company:
--- Engineer: Vladimir Galović
---
--- Create Date: 03/23/2025 04:03:58 PM
--- Design Name:
--- Module Name: parameterized_reg_file_tb - Behavioral
--- Project Name:
--- Target Devices:
--- Tool Versions:
--- Description:
---
--- Dependencies:
---
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
---
-----------------------------------------------------------------------------------
-
-library ieee;
-  use ieee.std_logic_1164.all;
-
-  -- Uncomment the following library declaration if using
-  -- arithmetic functions with Signed or Unsigned values
-  use ieee.numeric_std.all;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
--- library UNISIM;
--- use UNISIM.VComponents.all;
+library IEEE;
+  use IEEE.STD_LOGIC_1164.ALL;
+  use IEEE.NUMERIC_STD.ALL;
 
 entity parameterized_reg_file_tb is
   generic (
     -- Register File 1
-    width_1         : integer := 32;
-    num_registers_1 : integer := 32;
-    adr_bus_width_1 : integer := 5;
+    WIDTH_1         : integer := 32;
+    NUM_REGISTERS_1 : integer := 32;
+    ADR_BUS_WIDTH_1 : integer := 5;
 
     -- Register File 2
-    width_2         : integer := 16;
-    num_registers_2 : integer := 16;
-    adr_bus_width_2 : integer := 4;
+    WIDTH_2         : integer := 16;
+    NUM_REGISTERS_2 : integer := 16;
+    ADR_BUS_WIDTH_2 : integer := 4;
 
     -- Clock period
     period : time := 100 ns
@@ -52,80 +24,80 @@ architecture behavioral of parameterized_reg_file_tb is
 
   component parameterized_reg_file is
     generic (
-      width         : integer := 8;
-      num_registers : integer := 4;
-      adr_bus_width : integer := 2
+      WIDTH         : integer := 8;
+      NUM_REGISTERS : integer := 4;
+      ADR_BUS_WIDTH : integer := 2
     );
     port (
-      clk   : in    std_logic;
-      reset : in    std_logic;
+      clk   : in    STD_LOGIC;
+      reset : in    STD_LOGIC;
 
       ------------- Write Ports ---------------
 
       -- First Write Port
-      waddress1 : in    std_logic_vector(adr_bus_width - 1 downto 0);
-      wdata1    : in    std_logic_vector(width - 1 downto 0);
+      waddress1 : in    STD_LOGIC_VECTOR(ADR_BUS_WIDTH - 1 downto 0);
+      wdata1    : in    STD_LOGIC_VECTOR(WIDTH - 1 downto 0);
 
       -- Second Write Port
-      waddress2 : in    std_logic_vector(adr_bus_width - 1 downto 0);
-      wdata2    : in    std_logic_vector(width - 1 downto 0);
+      waddress2 : in    STD_LOGIC_VECTOR(ADR_BUS_WIDTH - 1 downto 0);
+      wdata2    : in    STD_LOGIC_VECTOR(WIDTH - 1 downto 0);
 
       -- Write Enable Port (active high)
-      we : in    std_logic_vector(1 downto 0);
+      we : in    STD_LOGIC_VECTOR(1 downto 0);
 
       ------------- Read Ports ---------------
 
       -- First Read Port
-      raddress1 : in    std_logic_vector(adr_bus_width - 1 downto 0);
-      rdata1    : out   std_logic_vector(width - 1 downto 0);
+      raddress1 : in    STD_LOGIC_VECTOR(ADR_BUS_WIDTH - 1 downto 0);
+      rdata1    : out   STD_LOGIC_VECTOR(WIDTH - 1 downto 0);
 
       -- Second Read Port
-      raddress2 : in    std_logic_vector(adr_bus_width - 1 downto 0);
-      rdata2    : out   std_logic_vector(width - 1 downto 0)
+      raddress2 : in    STD_LOGIC_VECTOR(ADR_BUS_WIDTH - 1 downto 0);
+      rdata2    : out   STD_LOGIC_VECTOR(WIDTH - 1 downto 0)
     );
   end component parameterized_reg_file;
 
   ----------- Signals for Clock and Reset ------------
 
-  signal clk_s   : std_logic;
-  signal reset_s : std_logic;
+  signal clk_s   : STD_LOGIC;
+  signal reset_s : STD_LOGIC;
 
   ----------- Signals for Register File 1 -------------
 
-  signal waddress1_1 : std_logic_vector(adr_bus_width_1 - 1 downto 0);
-  signal wdata1_1    : std_logic_vector(width_1 - 1 downto 0);
-  signal waddress2_1 : std_logic_vector(adr_bus_width_1 - 1 downto 0);
-  signal wdata2_1    : std_logic_vector(width_1 - 1 downto 0);
+  signal waddress1_1 : STD_LOGIC_VECTOR(ADR_BUS_WIDTH_1 - 1 downto 0);
+  signal wdata1_1    : STD_LOGIC_VECTOR(WIDTH_1 - 1 downto 0);
+  signal waddress2_1 : STD_LOGIC_VECTOR(ADR_BUS_WIDTH_1 - 1 downto 0);
+  signal wdata2_1    : STD_LOGIC_VECTOR(WIDTH_1 - 1 downto 0);
 
-  signal we_1 : std_logic_vector(1 downto 0);
+  signal we_1 : STD_LOGIC_VECTOR(1 downto 0);
 
-  signal raddress1_1 : std_logic_vector(adr_bus_width_1 - 1 downto 0);
-  signal rdata1_1    : std_logic_vector(width_1 - 1 downto 0);
-  signal raddress2_1 : std_logic_vector(adr_bus_width_1 - 1 downto 0);
-  signal rdata2_1    : std_logic_vector(width_1 - 1 downto 0);
+  signal raddress1_1 : STD_LOGIC_VECTOR(ADR_BUS_WIDTH_1 - 1 downto 0);
+  signal rdata1_1    : STD_LOGIC_VECTOR(WIDTH_1 - 1 downto 0);
+  signal raddress2_1 : STD_LOGIC_VECTOR(ADR_BUS_WIDTH_1 - 1 downto 0);
+  signal rdata2_1    : STD_LOGIC_VECTOR(WIDTH_1 - 1 downto 0);
 
   ----------- Signals for Register File 2 -------------
 
-  signal waddress1_2 : std_logic_vector(adr_bus_width_2 - 1 downto 0);
-  signal wdata1_2    : std_logic_vector(width_2 - 1 downto 0);
-  signal waddress2_2 : std_logic_vector(adr_bus_width_2 - 1 downto 0);
-  signal wdata2_2    : std_logic_vector(width_2 - 1 downto 0);
+  signal waddress1_2 : STD_LOGIC_VECTOR(ADR_BUS_WIDTH_2 - 1 downto 0);
+  signal wdata1_2    : STD_LOGIC_VECTOR(WIDTH_2 - 1 downto 0);
+  signal waddress2_2 : STD_LOGIC_VECTOR(ADR_BUS_WIDTH_2 - 1 downto 0);
+  signal wdata2_2    : STD_LOGIC_VECTOR(WIDTH_2 - 1 downto 0);
 
-  signal we_2 : std_logic_vector(1 downto 0);
+  signal we_2 : STD_LOGIC_VECTOR(1 downto 0);
 
-  signal raddress1_2 : std_logic_vector(adr_bus_width_2 - 1 downto 0);
-  signal rdata1_2    : std_logic_vector(width_2 - 1 downto 0);
-  signal raddress2_2 : std_logic_vector(adr_bus_width_2 - 1 downto 0);
-  signal rdata2_2    : std_logic_vector(width_2 - 1 downto 0);
+  signal raddress1_2 : STD_LOGIC_VECTOR(ADR_BUS_WIDTH_2 - 1 downto 0);
+  signal rdata1_2    : STD_LOGIC_VECTOR(WIDTH_2 - 1 downto 0);
+  signal raddress2_2 : STD_LOGIC_VECTOR(ADR_BUS_WIDTH_2 - 1 downto 0);
+  signal rdata2_2    : STD_LOGIC_VECTOR(WIDTH_2 - 1 downto 0);
 
 begin
 
   -- Component Instantiation
   dut_of_reg_file_1 : component parameterized_reg_file
     generic map (
-      width         => width_1,
-      num_registers => num_registers_1,
-      adr_bus_width => adr_bus_width_1
+      WIDTH         => WIDTH_1,
+      NUM_REGISTERS => NUM_REGISTERS_1,
+      ADR_BUS_WIDTH => ADR_BUS_WIDTH_1
     )
     port map (
       clk       => clk_s,
@@ -143,9 +115,9 @@ begin
 
   dut_of_reg_file_2 : component parameterized_reg_file
     generic map (
-      width         => width_2,
-      num_registers => num_registers_2,
-      adr_bus_width => adr_bus_width_2
+      WIDTH         => WIDTH_2,
+      NUM_REGISTERS => NUM_REGISTERS_2,
+      ADR_BUS_WIDTH => ADR_BUS_WIDTH_2
     )
     port map (
       clk       => clk_s,
@@ -201,51 +173,43 @@ begin
   -- Data Generation Process for Register File 1
   data_reg_file_1_gen : process is
 
-    -- Declaration of variables for write and read addresses
+    -- Declaration and initialization of variables for write and read addresses
 
-    variable write_address_1 : integer;
-    variable write_address_2 : integer;
+    variable write_address_1 : integer := 0;
+    variable write_address_2 : integer := 1;
 
-    variable read_address_1 : integer;
-    variable read_address_2 : integer;
+    variable read_address_1 : integer := 0;
+    variable read_address_2 : integer := WIDTH_1 - 1;
 
   begin
 
-    -- Iniclaistion of write and read addresses
-
-    write_address_1 := 0;
-    write_address_2 := 1;
-
-    read_address_1 := 0;
-    read_address_2 := width_1 - 1;
-
-    for i in 0 to width_1 - 1 loop
+    for i in 0 to WIDTH_1 - 1 loop
 
       ------------------ Write Ports ---------------
 
       -- First Write Port (prva adresa)
-      waddress1_1 <= std_logic_vector(to_unsigned(write_address_1, adr_bus_width_1));
-      wdata1_1    <= std_logic_vector(to_unsigned(i, width_1));
+      waddress1_1 <= STD_LOGIC_VECTOR(TO_UNSIGNED(write_address_1, ADR_BUS_WIDTH_1));
+      wdata1_1    <= STD_LOGIC_VECTOR(TO_UNSIGNED(i, WIDTH_1));
 
       -- Second Write Port (druga adresa, inkrementirano)
-      waddress2_1 <= std_logic_vector(to_unsigned(write_address_2, adr_bus_width_1));
-      wdata2_1    <= std_logic_vector(to_unsigned(i, width_1));
+      waddress2_1 <= STD_LOGIC_VECTOR(TO_UNSIGNED(write_address_2, ADR_BUS_WIDTH_1));
+      wdata2_1    <= STD_LOGIC_VECTOR(TO_UNSIGNED(i, WIDTH_1));
 
       -- Inkrementation for next write address
-      write_address_1 := (write_address_1 + 1) mod width_1;
-      write_address_2 := (write_address_2 - 1) mod width_1;
+      write_address_1 := (write_address_1 + 1) mod WIDTH_1;
+      write_address_2 := (write_address_2 - 1) mod WIDTH_1;
 
       ------------------ Read Ports ---------------
 
       -- First Read Port
-      raddress1_1 <= std_logic_vector(to_unsigned(read_address_1, adr_bus_width_1));
+      raddress1_1 <= STD_LOGIC_VECTOR(TO_UNSIGNED(read_address_1, ADR_BUS_WIDTH_1));
 
       -- Second Read Port
-      raddress2_1 <= std_logic_vector(to_unsigned(read_address_2, adr_bus_width_1));
+      raddress2_1 <= STD_LOGIC_VECTOR(TO_UNSIGNED(read_address_2, ADR_BUS_WIDTH_1));
 
       --  Incrementation for next read address
-      read_address_1 := (read_address_1 + 1) mod width_1;
-      read_address_2 := (read_address_2 - 1) mod width_1;
+      read_address_1 := (read_address_1 + 1) mod WIDTH_1;
+      read_address_2 := (read_address_2 - 1) mod WIDTH_1;
 
       wait for period / 2;
 
@@ -258,53 +222,45 @@ begin
   -- Data Generation Process for Register File 2
   data_reg_file_2_gen : process is
 
-    -- Declaration of variables for write and read addresses
+    -- Declaration and initialization of variables for write and read addresses
 
-    variable write_address_1 : integer;
-    variable write_address_2 : integer;
+    variable write_address_1 : integer := 1;
+    variable write_address_2 : integer := 0;
 
-    variable read_address_1 : integer;
-    variable read_address_2 : integer;
+    variable read_address_1 : integer := 0;
+    variable read_address_2 : integer := WIDTH_2 - 1;
 
   begin
 
-    -- Inicijalizacija write i read adresa
-
-    write_address_1 := 1;
-    write_address_2 := 0;
-
-    read_address_1 := 0;
-    read_address_2 := width_2 - 1;
-
-    for i in 0 to width_2 - 1 loop
+    for i in 0 to WIDTH_2 - 1 loop
 
       ------------------ Write Ports ---------------
 
       -- First Write Port
-      waddress1_2 <= std_logic_vector(to_unsigned(write_address_1, adr_bus_width_2));
-      wdata1_2    <= std_logic_vector(to_unsigned(i, width_2));
+      waddress1_2 <= STD_LOGIC_VECTOR(TO_UNSIGNED(write_address_1, ADR_BUS_WIDTH_2));
+      wdata1_2    <= STD_LOGIC_VECTOR(TO_UNSIGNED(i, WIDTH_2));
 
       -- Second Write Port
-      waddress2_2 <= std_logic_vector(to_unsigned(write_address_2, adr_bus_width_2));
-      wdata2_2    <= std_logic_vector(to_unsigned(i, width_2));
+      waddress2_2 <= STD_LOGIC_VECTOR(TO_UNSIGNED(write_address_2, ADR_BUS_WIDTH_2));
+      wdata2_2    <= STD_LOGIC_VECTOR(TO_UNSIGNED(i, WIDTH_2));
 
       -- Increment for next write address
-      write_address_1 := (write_address_1 + 1) mod width_2;
-      write_address_2 := (write_address_2 - 1) mod width_2;
+      write_address_1 := (write_address_1 + 1) mod WIDTH_2;
+      write_address_2 := (write_address_2 - 1) mod WIDTH_2;
 
       ------------------ Read Ports ---------------
 
       -- First Read Port
-      raddress1_2 <= std_logic_vector(to_unsigned(read_address_1, adr_bus_width_2));
+      raddress1_2 <= STD_LOGIC_VECTOR(TO_UNSIGNED(read_address_1, ADR_BUS_WIDTH_2));
 
       -- Second Read Port
-      raddress2_2 <= std_logic_vector(to_unsigned(read_address_2, adr_bus_width_2));
+      raddress2_2 <= STD_LOGIC_VECTOR(TO_UNSIGNED(read_address_2, ADR_BUS_WIDTH_2));
 
       wait for period;
 
       -- Increment for next read address
-      read_address_1 := (read_address_1 + 1) mod width_2;
-      read_address_2 := (read_address_2 - 1) mod width_2;
+      read_address_1 := (read_address_1 + 1) mod WIDTH_2;
+      read_address_2 := (read_address_2 - 1) mod WIDTH_2;
 
     end loop;
 

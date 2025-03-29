@@ -1,53 +1,25 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: Vladimir Galović
--- 
--- Create Date: 03/27/2025 12:19:15 PM
--- Design Name: 
--- Module Name: control_path - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
-use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
+  use IEEE.STD_LOGIC_1164.ALL;
+  use IEEE.NUMERIC_STD.ALL;
 
 entity control_path is
   generic (
     WIDTH : integer := 8
   );
   port (
-    clk : in std_logic;
-    rst : in std_logic;
+    clk : in STD_LOGIC;
+    rst : in STD_LOGIC;
 
-    start : in std_logic;
+    start : in STD_LOGIC;
 
-    n_n : in std_logic_vector(WIDTH-1 downto 0);
+    n_n : in STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 
-    last : out std_logic;
-    ready : out std_logic;
+    last : out STD_LOGIC;
+    ready : out STD_LOGIC;
 
-    sel : out std_logic_vector(1 downto 0)
+    sel : out STD_LOGIC_VECTOR(1 downto 0)
   );
-end control_path;
+end entity control_path;
 
 architecture Behavioral of control_path is
 

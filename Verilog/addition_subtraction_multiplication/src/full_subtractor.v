@@ -1,24 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company:
-// Engineer: Vladimir Galović
-//
-// Create Date: 03/27/2025 03:59:49 PM
-// Design Name:
-// Module Name: full_subtractor
-// Project Name:
-// Target Devices:
-// Tool Versions:
-// Description:
-//
-// Dependencies:
-//
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-//
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module full_subtractor (
     input  wire A,    // Minuend

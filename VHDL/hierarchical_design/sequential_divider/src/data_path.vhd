@@ -1,89 +1,61 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: Vladimir Galović
--- 
--- Create Date: 03/27/2025 11:57:00 AM
--- Design Name: 
--- Module Name: data_path - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
-use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
+  use IEEE.STD_LOGIC_1164.ALL;
+  use IEEE.NUMERIC_STD.ALL;
 
 entity data_path is
   generic (
     WIDTH : integer := 8
   );
   port (
-    clk : in std_logic;
-    rst : in std_logic;
+    clk : in STD_LOGIC;
+    rst : in STD_LOGIC;
 
-    a_in : in std_logic_vector(WIDTH-1 downto 0);
-    b_in : in std_logic_vector(WIDTH-1 downto 0);
+    a_in : in STD_LOGIC_VECTOR(WIDTH-1 downto 0);
+    b_in : in STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 
-    sel : in std_logic_vector(1 downto 0);
+    sel : in STD_LOGIC_VECTOR(1 downto 0);
 
-    n_n : out std_logic_vector(WIDTH-1 downto 0);
+    n_n : out STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 
-    quotient : out std_logic_vector(WIDTH-1 downto 0);
-    remainder : out std_logic_vector(WIDTH-1 downto 0)
+    quotient : out STD_LOGIC_VECTOR(WIDTH-1 downto 0);
+    remainder : out STD_LOGIC_VECTOR(WIDTH-1 downto 0)
   );
-end data_path;
+end entity data_path;
 
 architecture Behavioral of data_path is
 
-  component compare_and_subtract
+  component compare_and_subtract is
     generic (
       WIDTH : integer := WIDTH
     );
     port (
-      b_r : in std_logic_vector(WIDTH-1 downto 0);
-      r_r : in std_logic_vector(WIDTH-1 downto 0);
+      b_r : in STD_LOGIC_VECTOR(WIDTH-1 downto 0);
+      r_r : in STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 
-      q_bit : out std_logic;
-      r_temp : out std_logic_vector(WIDTH-1 downto 0)
+      q_bit : out STD_LOGIC;
+      r_temp : out STD_LOGIC_VECTOR(WIDTH-1 downto 0)
     );
   end component compare_and_subtract;
 
-  signal a_n : std_logic_vector(WIDTH-1 downto 0);
-  signal a_r : std_logic_vector(WIDTH-1 downto 0);
+  signal a_n : STD_LOGIC_VECTOR(WIDTH-1 downto 0);
+  signal a_r : STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 
-  signal b_n : std_logic_vector(WIDTH-1 downto 0);
-  signal b_r : std_logic_vector(WIDTH-1 downto 0);
+  signal b_n : STD_LOGIC_VECTOR(WIDTH-1 downto 0);
+  signal b_r : STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 
-  signal n_n_s : std_logic_vector(WIDTH-1 downto 0);
-  signal n_r : std_logic_vector(WIDTH-1 downto 0);
+  signal n_n_s : STD_LOGIC_VECTOR(WIDTH-1 downto 0);
+  signal n_r : STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 
-  signal r_n    : std_logic_vector(WIDTH-1 downto 0);
-  signal r_r    : std_logic_vector(WIDTH-1 downto 0);
-  signal r_temp : std_logic_vector(WIDTH-1 downto 0);
+  signal r_n    : STD_LOGIC_VECTOR(WIDTH-1 downto 0);
+  signal r_r    : STD_LOGIC_VECTOR(WIDTH-1 downto 0);
+  signal r_temp : STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 
-  signal q_bit : std_logic;
+  signal q_bit : STD_LOGIC;
 
-  signal sh_l_0 : std_logic_vector(WIDTH-1 downto 0);
-  signal sh_l_1 : std_logic_vector(WIDTH-1 downto 0);
+  signal sh_l_0 : STD_LOGIC_VECTOR(WIDTH-1 downto 0);
+  signal sh_l_1 : STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 
-  signal dec : std_logic_vector(WIDTH-1 downto 0);
+  signal dec : STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 begin
 
   compare_and_subtract_0 : compare_and_subtract
@@ -118,7 +90,7 @@ begin
   sh_l_0 <= a_r(WIDTH-2 downto 0) & q_bit;
   sh_l_1 <= r_temp(WIDTH-2 downto 0) & a_r(WIDTH-1);
 
-  dec <= std_logic_vector(unsigned(n_r) - to_unsigned(1, WIDTH));
+  dec <= STD_LOGIC_VECTOR(UNSIGNED(n_r) - TO_UNSIGNED(1, WIDTH));
 
  
   -- First way to implement multiplexers is by using competitive signal assignment.
@@ -131,7 +103,7 @@ begin
 
   b_n <= b_in when sel = "00" else b_r;
 
-  n_n_s <= std_logic_vector(to_unsigned(WIDTH+1, WIDTH)) when sel = "00" else
+  n_n_s <= STD_LOGIC_VECTOR(TO_UNSIGNED(WIDTH+1, WIDTH)) when sel = "00" else
            dec when sel = "01" else
            n_r;
 
@@ -152,7 +124,7 @@ begin
   --     when "00" =>
   --       a_n <= a_in;
   --       b_n <= b_in;
-  --       n_n_s <= std_logic_vector(to_unsigned(width+1, width));
+  --       n_n_s <= STD_LOGIC_VECTOR(TO_UNSIGNED(WIDTH+1, WIDTH));
   --       r_n <= (others => '0');
   --     when "01" =>
   --       a_n <= sh_l_0;

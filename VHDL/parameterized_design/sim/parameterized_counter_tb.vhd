@@ -1,40 +1,11 @@
-----------------------------------------------------------------------------------
--- Company:
--- Engineer: Vlado Galović
---
--- Create Date: 03/24/2025 12:54:31 PM
--- Design Name:
--- Module Name: parameterized_counter_tb - Behavioral
--- Project Name:
--- Target Devices:
--- Tool Versions:
--- Description:
---
--- Dependencies:
---
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
---
-----------------------------------------------------------------------------------
-
-library ieee;
-  use ieee.std_logic_1164.all;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
--- use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
--- library UNISIM;
--- use UNISIM.VComponents.all;
+library IEEE;
+  use IEEE.STD_LOGIC_1164.ALL;
 
 entity parameterized_counter_tb is
   generic (
     -- width of 8bit and 10bit counters
-    w_8bit  : integer := 8;
-    w_10bit : integer := 10;
+    W_8BIT  : integer := 8;
+    W_10BIT : integer := 10;
 
     -- clock period
     period : time := 100 ns
@@ -46,26 +17,26 @@ architecture behavioral of parameterized_counter_tb is
 
   component parameterized_counter is
     generic (
-      width : integer := 8
+      WIDTH : integer := 8
     );
     port (
-      clk   : in    std_logic;
-      reset : in    std_logic;
-      q     : out   std_logic_vector(width - 1 downto 0)
+      clk   : in    STD_LOGIC;
+      reset : in    STD_LOGIC;
+      q     : out   STD_LOGIC_VECTOR(WIDTH - 1 downto 0)
     );
   end component parameterized_counter;
 
-  signal clk_s   : std_logic;
-  signal reset_s : std_logic;
+  signal clk_s   : STD_LOGIC;
+  signal reset_s : STD_LOGIC;
 
-  signal q_8bit  : std_logic_vector(w_8bit - 1 downto 0);
-  signal q_10bit : std_logic_vector(w_10bit - 1 downto 0);
+  signal q_8bit  : STD_LOGIC_VECTOR(W_8BIT - 1 downto 0);
+  signal q_10bit : STD_LOGIC_VECTOR(W_10BIT - 1 downto 0);
 
 begin
 
   dut_8bit : component parameterized_counter
     generic map (
-      width => w_8bit
+      WIDTH => W_8BIT
     )
     port map (
       clk   => clk_s,
@@ -75,7 +46,7 @@ begin
 
   dut_10bit : component parameterized_counter
     generic map (
-      width => w_10bit
+      WIDTH => W_10BIT
     )
     port map (
       clk   => clk_s,

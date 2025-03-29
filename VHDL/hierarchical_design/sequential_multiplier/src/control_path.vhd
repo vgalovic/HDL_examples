@@ -1,51 +1,21 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: Vladimir Galović
--- 
--- Create Date: 03/26/2025 08:09:32 PM
--- Design Name: 
--- Module Name: control_path - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
-
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
+  use IEEE.STD_LOGIC_1164.ALL;
 
 entity control_path is
   port (
-    clk : in std_logic;
+    clk : in STD_LOGIC;
 
-    count_0 : in std_logic;
-    b_0     : in std_logic;
+    count_0 : in STD_LOGIC;
+    b_0     : in STD_LOGIC;
 
-    start : in std_logic;
-    reset : in std_logic;
+    start : in STD_LOGIC;
+    reset : in STD_LOGIC;
 
-    sel : out std_logic_vector(1 downto 0);
+    sel : out STD_LOGIC_VECTOR(1 downto 0);
 
-    ready : out std_logic
+    ready : out STD_LOGIC
   );
-end control_path;
+end entity control_path;
 
 architecture Behavioral of control_path is
   type fsm_states is (idle, shift, add);

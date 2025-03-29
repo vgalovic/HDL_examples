@@ -1,34 +1,5 @@
-----------------------------------------------------------------------------------
--- Company:
--- Engineer: Vladimir Galović
---
--- Create Date: 03/25/2025 02:19:48 PM
--- Design Name:
--- Module Name: tree_digit_decimal_counter_tb - Behavioral
--- Project Name:
--- Target Devices:
--- Tool Versions:
--- Description:
---
--- Dependencies:
---
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
---
-----------------------------------------------------------------------------------
-
-library ieee;
-  use ieee.std_logic_1164.all;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
--- use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
--- library UNISIM;
--- use UNISIM.VComponents.all;
+library IEEE;
+  use IEEE.STD_LOGIC_1164.ALL;
 
 entity tree_digit_decimal_counter_tb is
   generic (
@@ -41,22 +12,22 @@ architecture behavioral of tree_digit_decimal_counter_tb is
 
   component tree_digit_decimal_counter is
     port (
-      clk   : in    std_logic;
-      reset : in    std_logic;
+      clk   : in    STD_LOGIC;
+      reset : in    STD_LOGIC;
 
-      q_0 : out   std_logic_vector(3 downto 0);
-      q_1 : out   std_logic_vector(3 downto 0);
-      q_2 : out   std_logic_vector(3 downto 0)
+      q_0 : out   STD_LOGIC_VECTOR(3 downto 0);
+      q_1 : out   STD_LOGIC_VECTOR(3 downto 0);
+      q_2 : out   STD_LOGIC_VECTOR(3 downto 0)
 
     );
   end component tree_digit_decimal_counter;
 
-  signal clk_s   : std_logic;
-  signal reset_s : std_logic;
+  signal clk_s   : STD_LOGIC;
+  signal reset_s : STD_LOGIC;
 
-  signal q_0_s : std_logic_vector(3 downto 0);
-  signal q_1_s : std_logic_vector(3 downto 0);
-  signal q_2_s : std_logic_vector(3 downto 0);
+  signal q_0_s : STD_LOGIC_VECTOR(3 downto 0);
+  signal q_1_s : STD_LOGIC_VECTOR(3 downto 0);
+  signal q_2_s : STD_LOGIC_VECTOR(3 downto 0);
 
 begin
 

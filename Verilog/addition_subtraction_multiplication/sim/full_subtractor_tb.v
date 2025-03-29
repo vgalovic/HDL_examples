@@ -1,23 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company:
-// Engineer: Vladimir Galović
-//
-// Create Date: 03/27/2025 06:07:09 PM
-// Design Name:
-// Module Name: full_subtractor_tb
-// Project Name:
-// Target Devices:
-// Tool Versions:
-// Description:
-//
-// Dependencies:
-//
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-//
-//////////////////////////////////////////////////////////////////////////////////
 
 module full_subtractor_tb ();
 

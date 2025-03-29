@@ -1,65 +1,45 @@
-----------------------------------------------------------------------------------
--- Company:
--- Engineer: Vladimir Galovic
---
--- Create Date: 03/23/2025 03:12:21 PM
--- Design Name:
--- Module Name: parameterized_reg_file - Behavioral
--- Project Name:
--- Target Devices:
--- Tool Versions:
--- Description:
---
--- Dependencies:
---
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
---
-----------------------------------------------------------------------------------
-
-library ieee;
-  use ieee.std_logic_1164.all;
-  use ieee.numeric_std.all;
+library IEEE;
+  use IEEE.STD_LOGIC_1164.ALL;
+  use IEEE.NUMERIC_STD.ALL;
 
 entity parameterized_reg_file is
   generic (
-    width         : integer := 8;
-    num_registers : integer := 4;
-    adr_bus_width : integer := 2 -- log2(4) = 2 bits needed to address 8 registers
+    WIDTH         : integer := 8;
+    NUM_REGISTERS : integer := 4;
+    ADR_BUS_WIDTH : integer := 2 -- log2(4) = 2 bits needed to address 8 registers
   );
   port (
-    clk   : in    std_logic;
-    reset : in    std_logic;
+    clk   : in    STD_LOGIC;
+    reset : in    STD_LOGIC;
 
     ------------- Write Ports ---------------
 
     -- First Write Port
-    waddress1 : in    std_logic_vector(adr_bus_width - 1 downto 0);
-    wdata1    : in    std_logic_vector(width - 1 downto 0);
+    waddress1 : in    STD_LOGIC_VECTOR(ADR_BUS_WIDTH - 1 downto 0);
+    wdata1    : in    STD_LOGIC_VECTOR(WIDTH - 1 downto 0);
 
     -- Second Write Port
-    waddress2 : in    std_logic_vector(adr_bus_width - 1 downto 0);
-    wdata2    : in    std_logic_vector(width - 1 downto 0);
+    waddress2 : in    STD_LOGIC_VECTOR(ADR_BUS_WIDTH - 1 downto 0);
+    wdata2    : in    STD_LOGIC_VECTOR(WIDTH - 1 downto 0);
 
     -- Write Enable Port (active high)
-    we : in    std_logic_vector(1 downto 0);
+    we : in    STD_LOGIC_VECTOR(1 downto 0);
 
     ------------- Read Ports ---------------
 
     -- First Read Port
-    raddress1 : in    std_logic_vector(adr_bus_width - 1 downto 0);
-    rdata1    : out   std_logic_vector(width - 1 downto 0);
+    raddress1 : in    STD_LOGIC_VECTOR(ADR_BUS_WIDTH - 1 downto 0);
+    rdata1    : out   STD_LOGIC_VECTOR(WIDTH - 1 downto 0);
 
     -- Second Read Port
-    raddress2 : in    std_logic_vector(adr_bus_width - 1 downto 0);
-    rdata2    : out   std_logic_vector(width - 1 downto 0)
+    raddress2 : in    STD_LOGIC_VECTOR(ADR_BUS_WIDTH - 1 downto 0);
+    rdata2    : out   STD_LOGIC_VECTOR(WIDTH - 1 downto 0)
   );
 end entity parameterized_reg_file;
 
 architecture behavioral of parameterized_reg_file is
 
-  type reg_file_t is array (0 to num_registers - 1) of std_logic_vector(width - 1 downto 0);
+  type reg_file_t is array (0 to num_registers - 1) of STD_LOGIC_VECTOR(WIDTH - 1 downto 0);
 
   signal reg_file_s : reg_file_t;
 
@@ -80,8 +60,8 @@ begin
         reg_file_s <= (others => (others => '0')); -- Reset registers
       else
         -- Convert addresses only when needed
-        addr1 := to_integer(unsigned(waddress1));
-        addr2 := to_integer(unsigned(waddress2));
+        addr1 := TO_INTEGER(UNSIGNED(waddress1));
+        addr2 := TO_INTEGER(UNSIGNED(waddress2));
 
         --------------- Write Henries ---------------
 
@@ -103,9 +83,9 @@ begin
   end process reg_file_write;
 
   -- Register Read Process (Asynchronous)
-  rdata1 <= reg_file_s(to_integer(unsigned(raddress1))) when to_integer(unsigned(raddress1)) < num_registers else
+  rdata1 <= reg_file_s(TO_INTEGER(UNSIGNED(raddress1))) when TO_INTEGER(UNSIGNED(raddress1)) < num_registers else
             (others => '0');
-  rdata2 <= reg_file_s(to_integer(unsigned(raddress2))) when to_integer(unsigned(raddress2)) < num_registers else
+  rdata2 <= reg_file_s(TO_INTEGER(UNSIGNED(raddress2))) when TO_INTEGER(UNSIGNED(raddress2)) < num_registers else
             (others => '0');
 
 end architecture behavioral;
