@@ -19,7 +19,7 @@ begin
 
     if falling_edge(clk) then
       if S = '0' and R = '0' then
-        Q_internal := '1';
+        Q_internal := Q_internal;
       elsif S = '1' and R = '0' then
         Q_internal := '1';
       elsif S = '0' and R = '1' then
