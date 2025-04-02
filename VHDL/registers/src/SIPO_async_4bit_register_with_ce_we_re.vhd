@@ -29,7 +29,8 @@ begin
     elsif rising_edge(clk) then
       if ce = '1' then
         if we = '1' then
-          Q_s <= D & Q_s(WIDTH - 1 downto 1);
+          Q_s <= Q_s(WIDTH - 2 downto 0) & D;  -- Shift left, serial input `D` goes to LSB (more common in SIPO)
+          -- Q_s <= D & Q_s(WIDTH - 1 downto 1);  -- Shift right, serial input `D` goes to MSB
         end if;
       end if;
     end if;
