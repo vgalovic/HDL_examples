@@ -30,7 +30,9 @@ begin
         if rising_edge(clk) then
             if reset = '1' then
                 count_s <= MIN;
-            elsif(laod = '1' and counter_value < STD_LOGIC_VECTOR(TO_UNSIGNED(MAX - 1, WIDTH)) and counter_value > STD_LOGIC_VECTOR(TO_UNSIGNED(MIN, WIDTH))) then
+            elsif(laod = '1' and
+                  counter_value < STD_LOGIC_VECTOR(TO_UNSIGNED(MAX - 1, WIDTH)) and
+                  counter_value > STD_LOGIC_VECTOR(TO_UNSIGNED(MIN, WIDTH))) then
                     count_s <= TO_INTEGER(UNSIGNED(counter_value));
             elsif en = '1' then
                 if count_s >= MAX - 1 then
