@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
-entity counter_up_16bit_owerflow is
+entity counter_up_16bit_overflow is
     Generic (
         WIDTH : integer := 16
     );
@@ -15,9 +15,9 @@ entity counter_up_16bit_owerflow is
         q : out STD_LOGIC_VECTOR (WIDTH - 1 downto 0)
     );
 
-end counter_up_16bit_owerflow;
+end counter_up_16bit_overflow;
 
-architecture Behavioral of counter_up_16bit_owerflow is
+architecture Behavioral of counter_up_16bit_overflow is
     constant overflow_value : STD_LOGIC_VECTOR (WIDTH - 1 downto 0) := (others => '1');
     signal count_s : STD_LOGIC_VECTOR (WIDTH - 1 downto 0) := (others => '0');
 begin

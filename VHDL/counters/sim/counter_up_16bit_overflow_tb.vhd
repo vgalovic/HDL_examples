@@ -1,12 +1,12 @@
 library IEEE;
   use IEEE.STD_LOGIC_1164.ALL;
 
-entity counter_up_16bit_owerflow_tb is
+entity counter_up_16bit_overflow_tb is
 --  Port ( );
-end entity counter_up_16bit_owerflow_tb;
+end entity counter_up_16bit_overflow_tb;
 
-architecture Behavioral of counter_up_16bit_owerflow_tb is
-  component counter_up_16bit_owerflow is
+architecture Behavioral of counter_up_16bit_overflow_tb is
+  component counter_up_16bit_overflow is
     Generic (
       WIDTH : integer := 16
     );
@@ -29,7 +29,7 @@ architecture Behavioral of counter_up_16bit_owerflow_tb is
 
 begin
 
-  duv: counter_up_16bit_owerflow
+  duv: counter_up_16bit_overflow
     Generic map (
       WIDTH => 16
     )
