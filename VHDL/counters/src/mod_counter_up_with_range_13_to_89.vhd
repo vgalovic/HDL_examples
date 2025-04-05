@@ -30,10 +30,8 @@ begin
         if rising_edge(clk) then
             if reset = '1' then
                 count_s <= MIN;
-            elsif laod = '1' then
-                if counter_value < std_logic_vector(to_unsigned(MAX - 1, WIDTH)) then
-                    count_s <= to_integer(unsigned(counter_value));
-                end if;
+            elsif(laod = '1' and counter_value < STD_LOGIC_VECTOR(TO_UNSIGNED(MAX - 1, WIDTH)) and counter_value > STD_LOGIC_VECTOR(TO_UNSIGNED(MIN, WIDTH))) then
+                    count_s <= TO_INTEGER(UNSIGNED(counter_value));
             elsif en = '1' then
                 if count_s >= MAX - 1 then
                     count_s <= MIN;
@@ -50,7 +48,7 @@ begin
         end if;
     end process cnt;
 
-    q <= std_logic_vector(to_unsigned(count_s, WIDTH));
+    q <= STD_LOGIC_VECTOR(TO_UNSIGNED(count_s, WIDTH));
 
 
 end Behavioral;
