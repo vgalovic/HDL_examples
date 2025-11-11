@@ -30,15 +30,15 @@ This organization allows for easy navigation and usage of different modules base
 The modules in this repository are listed below in the order I created them. However, you are free to explore them in any order:
 
 1. **logic_gates** – Basic logic gates implementation
-2. **mux_demux** – Multiplexers and demultiplexers
-3. **coder_converter_comparator** – Encoders, decoders, converters, and comparators
-4. **latches_and_flip-flops** – Latches and flip-flops (sequential elements)
-5. **registers** – Register-based designs
-6. **memory** – Memory modules and related concepts
-7. **counters** – Various types of counters
-8. **FSM** – Finite State Machines
-9. **parameterized_design** – Parameterized modules and reusable components
-10. **hierarchical_design** – Hierarchical design with submodules
+1. **mux_demux** – Multiplexers and demultiplexers
+1. **coder_converter_comparator** – Encoders, decoders, converters, and comparators
+1. **latches_and_flip-flops** – Latches and flip-flops (sequential elements)
+1. **registers** – Register-based designs
+1. **memory** – Memory modules and related concepts
+1. **counters** – Various types of counters
+1. **FSM** – Finite State Machines
+1. **parameterized_design** – Parameterized modules and reusable components
+1. **hierarchical_design** – Hierarchical design with submodules
 
 > 📝 **Note**:
 > The _hierarchical_design_ module contains subprojects that demonstrate hierarchy in both `VHDL/` and `Verilog/`.
