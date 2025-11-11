@@ -1,0 +1,33 @@
+[server]
+root_dir = "."
+log_level = "info"
+log_file = "/tmp/vhdl_ls.log"
+lint_on_open = true
+lint_on_save = true
+lint_on_change = false
+formatter = "none"
+format_on_save = false
+
+[workspace]
+sources = [
+  "src",
+  "sim",
+]
+
+[libraries]
+
+# Use a single default library for all files
+
+[libraries.defaultlib]
+files = ["VHDL/**/src/**/*.vhd", "VHDL/**/sim/**/*.vhd"]
+
+
+[analysis]
+enable_semantic_tokens = true
+check_syntax = true
+check_semantics = true
+hover = true
+completion = true
+references = true
+symbols = true
+diagnostics = true
